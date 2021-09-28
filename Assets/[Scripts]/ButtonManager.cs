@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+
+    private int nextSceneIndex;
+    private int previousSceneIndex;
+
     // Start is called before the first frame update
     void Start()
     {
+        nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
+
         Scene activeScene = SceneManager.GetActiveScene();
         Debug.Log(activeScene.name);
     }
@@ -19,15 +26,12 @@ public class ButtonManager : MonoBehaviour
 
     public void OnBackButtonPressed()
     {
-        if( SceneManager.GetActiveScene().name == "Main")
-        {
-            SceneManager.LoadScene("Start");
-        }
+        SceneManager.LoadScene(previousSceneIndex);
     }
 
     public void OnNextButtonPressed()
     {
-        SceneManager.LoadScene("End");
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     public void OnMenuButtonPressed()
